@@ -1,0 +1,23 @@
+[project]
+name = "clash_of_the_llms"
+version = "0.1.0"
+description = "Clash_of_the_LLMs using crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "crewai[tools]>=0.193.2,<1.0.0"
+]
+
+[project.scripts]
+clash_of_the_llms = "clash_of_the_llms.main:run"
+run_crew = "clash_of_the_llms.main:run"
+train = "clash_of_the_llms.main:train"
+replay = "clash_of_the_llms.main:replay"
+test = "clash_of_the_llms.main:test"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"
