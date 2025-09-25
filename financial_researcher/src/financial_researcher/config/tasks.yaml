@@ -1,17 +1,107 @@
+# src/research_crew/config/tasks.yaml
+
 research_task:
   description: >
-    Conduct a thorough research about {topic}
-    Make sure you find any interesting and relevant information given
-    the current year is {current_year}.
+    Conduct thorough research on {company}. Focus on:
+      1) Company profile & segments (what they sell, where they operate)
+      2) Current status & financial health (latest FY/Q metrics)
+      3) Historical performance (last 3–5 years: revenue, margin, FCF)
+      4) Competitive landscape (top 3–5 competitors, differentiation)
+      5) Major challenges & opportunities (product, regulatory, macro)
+      6) Recent news & events (last 6–12 months)
+      7) Outlook signals & near-term catalysts (product launches, guidance)
+    Requirements:
+      - Cite sources inline as [1], [2], etc., and provide a Sources section with URLs.
+      - Prefer primary sources (10-K/20-F, investor decks, earnings call transcripts) over blogs.
+      - Note any data gaps or uncertainties as "Limitations".
+      - Do NOT make trading recommendations.
+    Output format (Markdown):
+      # {company}: Research Dossier
+      ## Snapshot
+      - Ticker / Exchange / HQ:
+      - Segments / Products:
+      - Geographies:
+      ## Key KPIs (Last 5 FY if available)
+      | Metric | FY-4 | FY-3 | FY-2 | FY-1 | FY |
+      |---|---:|---:|---:|---:|---:|
+      | Revenue |  |  |  |  |  |
+      | Gross Margin % |  |  |  |  |  |
+      | Operating Margin % |  |  |  |  |  |
+      | Free Cash Flow |  |  |  |  |  |
+      | Net Debt / (Cash) |  |  |  |  |  |
+      ## Competitive Landscape
+      - Competitor A (positioning, share, moat) [ref]
+      - Competitor B …
+      ## Challenges & Opportunities
+      - Challenge:
+      - Opportunity:
+      ## Recent News (6–12 months)
+      - Date — Headline — Why it matters [ref]
+      ## Outlook Signals & Catalysts
+      - Catalyst / timing / impact hypothesis
+      ## Limitations
+      - Data gaps / assumptions
+      ## Sources
+      - [1] …
+      - [2] …
   expected_output: >
-    A list with 10 bullet points of the most relevant information about {topic}
+    A well-sourced Markdown dossier with sections exactly as specified (including the KPI table),
+    clear bullet points, and a Sources list with working URLs.
   agent: researcher
+  output_file: output/research.md
 
-reporting_task:
+analysis_task:
   description: >
-    Review the context you got and expand each topic into a full section for a report.
-    Make sure the report is detailed and contains any and all relevant information.
+    Analyze the research findings and produce a stakeholder-ready report on {company}.
+    Use only the research_task content (do not invent facts). Synthesize, contextualize, and
+    frame implications for operators/investors—without giving investment advice.
+    Requirements:
+      - Start with a crisp Executive Summary (5–8 bullets).
+      - Include structured analysis: growth drivers, margins, unit economics (if available),
+        competitive dynamics (Porter’s 5 Forces lite), risks, and near-term catalysts.
+      - Provide a SWOT table and a simple risk register with likelihood/impact.
+      - Provide a forward view (base/upsides/downsides) as qualitative scenarios; no price targets.
+      - Add a "What to Watch Next" checklist (events, metrics).
+      - Include a short “Assumptions & Limitations” section and reproduce the Sources list.
+      - Add a disclaimer: “For research and education only; not investment advice.”
+    Recommended structure (Markdown):
+      # {company}: Market Analysis Report
+      ## Executive Summary
+      - …
+      ## Key Insights
+      - …
+      ## Growth Drivers & Unit Economics
+      - …
+      ## Competitive Dynamics (Porter-lite)
+      - Supplier power: Low/Med/High — rationale
+      - Buyer power: …
+      - Threat of substitutes: …
+      - Threat of new entrants: …
+      - Rivalry: …
+      ## SWOT
+      | Strengths | Weaknesses | Opportunities | Threats |
+      |---|---|---|---|
+      |  |  |  |  |
+      ## Risk Register
+      | Risk | Likelihood | Impact | Mitigation/Notes |
+      |---|---:|---:|---|
+      |  |  |  |  |
+      ## Scenarios (12–24 months)
+      - Base case: drivers, watch items
+      - Upside case: triggers
+      - Downside case: triggers
+      ## What to Watch Next
+      - Upcoming events/metrics
+      ## Assumptions & Limitations
+      - …
+      ## Sources
+      - (mirror from research doc)
+      ## Disclaimer
+      For research and education only; not investment advice.
   expected_output: >
-    A fully fledged report with the main topics, each with a full section of information.
-    Formatted as markdown without '```'
-  agent: reporting_analyst
+    A polished Markdown report that follows the structure above, synthesizes the research into
+    clear insights, includes SWOT and a risk register table, and ends with Sources + Disclaimer.
+  agent: analyst
+  context:
+    - research_task
+  output_file: output/report.md
