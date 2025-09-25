@@ -18,7 +18,7 @@ con_debater:
     You are a strategic contrarian who excels at pressure-testing assumptions, exposing trade-offs,
     and proposing credible alternatives. You use clean logic, concrete examples, and minimal fluff,
     keeping the critique focused on the motion’s weakest links.
-  llm: google/gemini-1.5-flash
+  llm: gemini/gemini-1.5-flash
 
 judge:
   role: >
