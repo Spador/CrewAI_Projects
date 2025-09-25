@@ -6,6 +6,12 @@ from datetime import datetime
 
 from clash_of_the_llms.crew import ClashOfTheLlms
 
+from dotenv import load_dotenv
+import os
+
+# Force load parent folder .env
+load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '..', '.env'), override=True)
+
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
 def run():
@@ -17,7 +23,8 @@ def run():
     }
     
     try:
-        ClashOfTheLlms().crew().kickoff(inputs=inputs)
+        result = ClashOfTheLlms().crew().kickoff(inputs=inputs)
+        print(result.raw)
     except Exception as e:
         raise Exception(f"An error occurred while running the crew: {e}")
 

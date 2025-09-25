@@ -3,6 +3,12 @@ from crewai.project import CrewBase, agent, crew, task
 from crewai.agents.agent_builder.base_agent import BaseAgent
 from typing import List
 
+from dotenv import load_dotenv
+import os
+
+# Force load parent folder .env
+load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '..', '.env'), override=True)
+
 @CrewBase
 class ClashOfTheLlms():
     """ClashOfTheLlms crew"""

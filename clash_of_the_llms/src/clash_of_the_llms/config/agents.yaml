@@ -30,4 +30,4 @@ judge:
     You are an impartial adjudicator known for fairness and sharp reasoning. You weigh clarity, logic, 
     evidence, and persuasiveness while ignoring personal beliefs or outside knowledge. You provide a clear 
     verdict along with a short explanation of your decision.
-  llm: grok/grok-4-fast-reasoning
+  llm: xai/grok-4-fast
