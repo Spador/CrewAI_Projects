@@ -4,7 +4,7 @@ propose:
     Keep it clear, logical, and convincing.
   expected_output: >
     A concise, well-structured argument supporting the motion: {motion}.
-  agent: debater
+  agent: pro_debater
   output_file: output/propose.md
 
 oppose:
@@ -13,7 +13,7 @@ oppose:
     Keep it clear, logical, and convincing.
   expected_output: >
     A concise, well-structured argument against the motion: {motion}.
-  agent: debater
+  agent: con_debater
   output_file: output/oppose.md
 
 decide:
