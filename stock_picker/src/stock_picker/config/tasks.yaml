@@ -1,17 +1,31 @@
-research_task:
+find_trending_companies:
   description: >
-    Conduct a thorough research about {topic}
-    Make sure you find any interesting and relevant information given
-    the current year is {current_year}.
+    Identify the top trending companies in {sector} by scanning the latest news.
+    Always surface new companies not previously selected.
   expected_output: >
-    A list with 10 bullet points of the most relevant information about {topic}
-  agent: researcher
+    A list of trending companies in {sector}.
+  agent: trending_company_finder
+  output_file: output/trending_companies.json
 
-reporting_task:
+research_trending_companies:
   description: >
-    Review the context you got and expand each topic into a full section for a report.
-    Make sure the report is detailed and contains any and all relevant information.
+    Given the list of trending companies, deliver a detailed analysis report on each
+    by reviewing reliable online sources.
   expected_output: >
-    A fully fledged report with the main topics, each with a full section of information.
-    Formatted as markdown without '```'
-  agent: reporting_analyst
+    A report with in-depth analysis of each company.
+  agent: financial_researcher
+  context:
+    - find_trending_companies
+  output_file: output/research_report.json
+
+pick_best_company:
+  description: >
+    Evaluate the research findings and choose the single best company for investment potential.
+    Send a push notification with the decision and a one-sentence rationale,
+    followed by a detailed report explaining the choice and why other companies were not selected.
+  expected_output: >
+    The chosen company and the reasons for its selection, plus reasons for not selecting the others.
+  agent: stock_picker
+  context:
+    - research_trending_companies
+  output_file: output/decision.md
