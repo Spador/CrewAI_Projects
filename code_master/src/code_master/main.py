@@ -1,68 +1,38 @@
 #!/usr/bin/env python
 import sys
 import warnings
-
+import os
 from datetime import datetime
 
-from code_master.crew import CodeMaster
+from code_master.crew import Coder
 
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
-# This main file is intended to be a way for you to run your
-# crew locally, so refrain from adding unnecessary logic into this file.
-# Replace with inputs you want to test with, it will automatically
-# interpolate any tasks and agents information
+# Create output directory if it doesn't exist
+os.makedirs('output', exist_ok=True)
+
+assignment = (
+    "Write a Python program to generate the first 1,000 prime numbers "
+    "using an efficient algorithm (not simple trial division). "
+    "Store them in a list, then calculate and print: "
+    "1) the sum of all primes, "
+    "2) the largest prime, "
+    "3) the average of the primes, "
+    "and 4) how many of them are twin primes. "
+    "Make sure the program runs efficiently."
+)
 
 def run():
     """
     Run the crew.
     """
     inputs = {
-        'topic': 'AI LLMs',
-        'current_year': str(datetime.now().year)
+        'assignment': assignment,
     }
     
-    try:
-        CodeMaster().crew().kickoff(inputs=inputs)
-    except Exception as e:
-        raise Exception(f"An error occurred while running the crew: {e}")
+    result = Coder().crew().kickoff(inputs=inputs)
+    print(result.raw)
 
 
-def train():
-    """
-    Train the crew for a given number of iterations.
-    """
-    inputs = {
-        "topic": "AI LLMs",
-        'current_year': str(datetime.now().year)
-    }
-    try:
-        CodeMaster().crew().train(n_iterations=int(sys.argv[1]), filename=sys.argv[2], inputs=inputs)
 
-    except Exception as e:
-        raise Exception(f"An error occurred while training the crew: {e}")
 
-def replay():
-    """
-    Replay the crew execution from a specific task.
-    """
-    try:
-        CodeMaster().crew().replay(task_id=sys.argv[1])
-
-    except Exception as e:
-        raise Exception(f"An error occurred while replaying the crew: {e}")
-
-def test():
-    """
-    Test the crew execution and returns the results.
-    """
-    inputs = {
-        "topic": "AI LLMs",
-        "current_year": str(datetime.now().year)
-    }
-    
-    try:
-        CodeMaster().crew().test(n_iterations=int(sys.argv[1]), eval_llm=sys.argv[2], inputs=inputs)
-
-    except Exception as e:
-        raise Exception(f"An error occurred while testing the crew: {e}")
