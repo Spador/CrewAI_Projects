@@ -1,0 +1,47 @@
+```python
+def sieve_of_eratosthenes(limit):
+    """Generate all prime numbers up to the specified limit using the Sieve of Eratosthenes algorithm."""
+    is_prime = [True] * (limit + 1)
+    p = 2
+    while (p * p <= limit):
+        if is_prime[p]:
+            for i in range(p * p, limit + 1, p):
+                is_prime[i] = False
+        p += 1
+    return [p for p in range(2, limit + 1) if is_prime[p]]
+
+def generate_first_n_primes(n):
+    """Generate the first n prime numbers."""
+    limit = n * (int(n * (1.2)))  # Upper bound estimate for first n primes
+    primes = sieve_of_eratosthenes(limit)
+    return primes[:n]
+
+def calculate_primes_statistics(primes):
+    """Calculate sum, max, average, and twin primes count from a list of primes."""
+    total_sum = sum(primes)
+    largest_prime = primes[-1]
+    average = total_sum / len(primes)
+    twin_prime_count = sum(1 for i in range(len(primes) - 1) if primes[i + 1] - primes[i] == 2)
+    
+    return total_sum, largest_prime, average, twin_prime_count
+
+# Generate the first 500 prime numbers
+first_500_primes = generate_first_n_primes(500)
+
+# Calculate the required statistics
+total_sum, largest_prime, average, twin_prime_count = calculate_primes_statistics(first_500_primes)
+
+# Print the results
+print(f"Total Sum of Primes: {total_sum}")
+print(f"Largest Prime: {largest_prime}")
+print(f"Average of Primes: {average:.2f}")
+print(f"Count of Twin Primes: {twin_prime_count}")
+```
+
+### Program Output:
+```
+Total Sum of Primes: 824693
+Largest Prime: 3571
+Average of Primes: 1649.39
+Count of Twin Primes: 96
+```

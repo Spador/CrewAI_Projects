@@ -18,8 +18,8 @@ class Coder():
             config=self.agents_config['coder'],
             verbose=True,
             allow_code_execution=True,
-            code_execution_mode="safe",  # Uses Docker for safety
-            max_execution_time=30, 
+            code_execution_mode="safe",
+            max_execution_time=40, 
             max_retry_limit=3 
     )
 

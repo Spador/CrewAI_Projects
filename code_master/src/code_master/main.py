@@ -12,7 +12,7 @@ warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 os.makedirs('output', exist_ok=True)
 
 assignment = (
-    "Write a Python program to generate the first 1,000 prime numbers "
+    "Write a Python program to generate the first 500 prime numbers "
     "using an efficient algorithm (not simple trial division). "
     "Store them in a list, then calculate and print: "
     "1) the sum of all primes, "
